@@ -1,0 +1,33 @@
+{
+  "name": "imooc",
+  "version": "0.0.1",
+  "description": "imooc movie",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.9.3",
+    "express": "^4.10.2",
+    "jade": "^1.7.0",
+    "moment": "^2.8.4",
+    "mongoose": "^3.8.19",
+    "multer": "^0.1.6",
+    "underscore": "^1.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AntSworD/buildSiteByNodeMongodbA.git"
+  },
+  "keywords": [
+    "imooc",
+    "movie"
+  ],
+  "author": "AntSworD",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/AntSworD/buildSiteByNodeMongodbA/issues"
+  },
+  "homepage": "https://github.com/AntSworD/buildSiteByNodeMongodbA"
+}

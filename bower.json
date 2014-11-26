@@ -1,0 +1,24 @@
+{
+  "name": "imooc",
+  "version": "0.0.1",
+  "homepage": "https://github.com/AntSworD/buildSiteByNodeMongodbA",
+  "authors": [
+    "AntSworD <zhengjj.asd@gmail.com>"
+  ],
+  "description": "imooc movie",
+  "keywords": [
+    "imooc"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.1"
+  }
+}
