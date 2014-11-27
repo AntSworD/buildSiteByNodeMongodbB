@@ -3,7 +3,7 @@ var bcrypt = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
 
 var UserSchema = new mongoose.Schema({
-  naem: {
+  name: {
     unique: true,
     type: String
   },
@@ -38,12 +38,10 @@ UserSchema.pre('save', function(next) {
       if (err) {
         return next(err);
       }
-
       user.password = hash;
       next();
     });
   });
-  next();
 });
 
 UserSchema.statics = {
