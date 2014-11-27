@@ -6,10 +6,13 @@ var app = express();
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var session = require('express-session');
-var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser');
+var mongoStore = require('connect-mongo')(session);
+
+var dbUrl = 'mongodb://localhost/imooc';
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/imooc');
+mongoose.connect(dbUrl);
 
 var Movie = require('./models/movie');
 var User = require('./models/user');
@@ -23,7 +26,11 @@ app.use(cookieParser());
 app.use(session({
   secret: 'imooc',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new mongoStore({
+    url: dbUrl,
+    collection: 'sessions'
+  })
 }));
 app.use(multer());
 
