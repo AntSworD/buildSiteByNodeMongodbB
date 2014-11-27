@@ -4,6 +4,7 @@
   "description": "imooc movie",
   "main": "app.js",
   "dependencies": {
+    "bcrypt": "^0.8.0",
     "body-parser": "^1.9.3",
     "express": "^4.10.2",
     "jade": "^1.7.0",
