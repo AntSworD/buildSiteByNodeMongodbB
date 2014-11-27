@@ -5,6 +5,8 @@ var port = process.env.PORT || 3400;
 var app = express();
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var session = require('express-session');
+var cookieParser = require('cookie-parser')
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/imooc');
@@ -17,6 +19,12 @@ app.set('view engine', 'jade');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser());
+app.use(session({
+  secret: 'imooc',
+  resave: false,
+  saveUninitialized: false
+}));
 app.use(multer());
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -27,6 +35,8 @@ console.log('imooc started on port ' + port);
 
 // index page
 app.get('/', function(req, res) {
+  console.log('user in session: ');
+  console.log(req.session.user);
   Movie.fetch(function(err, movies) {
     if (err) {
       console.log(err);
@@ -84,7 +94,8 @@ app.post('/user/signin', function(req, res) {
         }
 
         if (isMatch) {
-          console.log('Password is matched');
+          req.session.user = user;
+
           return res.redirect('/');
         } else {
           console.log('Password is not matched');
