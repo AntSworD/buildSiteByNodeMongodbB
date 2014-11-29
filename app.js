@@ -14,7 +14,7 @@ var dbUrl = 'mongodb://localhost/imooc';
 var mongoose = require('mongoose');
 mongoose.connect(dbUrl);
 
-app.set('views', './views/pages');
+app.set('views', './app/views/pages');
 app.set('view engine', 'jade');
 
 app.use(bodyParser.json());

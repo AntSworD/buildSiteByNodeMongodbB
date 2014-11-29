@@ -43,7 +43,7 @@ exports.update = function(req, res) {
       if (err) {
         console.log(err);
       }
-
+      console.log(movie);
       res.render('admin', {
         title: 'imooc 后台更新页',
         movie: movie

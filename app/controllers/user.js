@@ -78,7 +78,6 @@ exports.logout = function(req, res) {
 
 // userlist page
 exports.list = function(req, res) {
-  //'http://player.youku.com/player.php/sid/XNjA1Njc0NTUy/v.swf';
 
   User.fetch(function(err, users) {
     if (err) {
@@ -90,4 +89,25 @@ exports.list = function(req, res) {
       users: users
     });
   });
+};
+
+// midware for user
+exports.signinRequired = function(req, res, next) {
+  var user = req.session.user;
+
+  if(!user) {
+    return res.redirect('/signin');
+  }
+
+  next();
+};
+
+exports.adminRequired = function(req, res, next) {
+  var user = req.session.user;
+
+  if (user.role <= 10) {
+    return res.redirect('/signin');
+  }
+
+  next();
 };
