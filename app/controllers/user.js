@@ -1,6 +1,18 @@
 var User = require('../models/user');
 
 // signup
+exports.showSignup = function(req, res) {
+  res.render('signup', {
+    title: '注册页面'
+  });
+};
+
+exports.showSignin = function(req, res) {
+  res.render('signin', {
+    title: '登录页面'
+  });
+};
+
 exports.signup = function(req, res) {
   var _user = req.body.user;
 
@@ -10,7 +22,7 @@ exports.signup = function(req, res) {
     }
 
     if (user) {
-      res.redirect('/');
+      return res.redirect('/signin');
     } else {
       var user = new User(_user);
 
@@ -19,7 +31,7 @@ exports.signup = function(req, res) {
           console.log(err);
         }
 
-        res.redirect('/admin/userlist');
+        res.redirect('/');
       });
     }
   });
@@ -37,7 +49,7 @@ exports.signin = function(req, res) {
     }
 
     if (!user) {
-      return res.redirect('/');
+      return res.redirect('/signup');
     } else {
       user.comparePassword(password, function(err, isMatch) {
         if (err) {
@@ -49,7 +61,7 @@ exports.signin = function(req, res) {
 
           return res.redirect('/');
         } else {
-          console.log('Password is not matched');
+          return res.redirect('/signin');
         }
       });
     }
