@@ -7,6 +7,7 @@ var multer = require('multer');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var mongoStore = require('connect-mongo')(session);
+var logger = require('morgan');
 
 var dbUrl = 'mongodb://localhost/imooc';
 
@@ -32,6 +33,13 @@ app.use(multer());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.locals.moment = require('moment');
+
+if ('development' === app.get('env')) {
+  app.set('showStackError', true);
+  app.use(logger(':method :url :status :remote-addr'));
+  app.locals.pretty = true;
+  mongoose.set('debug', true);
+}
 
 require('./config/routes')(app);
 
