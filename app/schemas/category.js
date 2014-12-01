@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
 
-var CatetorySchema = new Schema({
+var CategorySchema = new Schema({
   name: String,
   movies: [{type: ObjectId, ref: 'Movie'}],
   meta: {
@@ -17,7 +17,7 @@ var CatetorySchema = new Schema({
   }
 });
 
-CatetorySchema.pre('save', function(next) {
+CategorySchema.pre('save', function(next) {
   if (this.isNew) {
     this.meta.createAt = this.meta.updateAt = Date.now();
   } else {
@@ -27,7 +27,7 @@ CatetorySchema.pre('save', function(next) {
   next();
 });
 
-CatetorySchema.statics = {
+CategorySchema.statics = {
   fetch: function(cb) {
     return this
       .find({})
@@ -42,4 +42,4 @@ CatetorySchema.statics = {
   }
 };
 
-module.exports = CatetorySchema;
+module.exports = CategorySchema;
