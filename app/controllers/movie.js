@@ -11,13 +11,17 @@ var path = require('path');
 exports.detail = function(req, res) {
   var id = req.params.id;
 
+  Movie.update({_id: id}, {$inc: {pv: 1}}, function(err) {
+    if (err) {
+      console.log(err);
+    }
+  });
   Movie.findById(id, function(err, movie) {
     Comment
       .find({movie: id})
       .populate('from', 'name')
       .populate('reply.from reply.to', 'name')
       .exec(function(err, comments) {
-        console.log(comments);
         res.render('detail', {
           title: 'imooc ' + movie.title,
           movie: movie,
