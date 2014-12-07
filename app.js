@@ -14,6 +14,25 @@ var dbUrl = 'mongodb://localhost/imooc';
 var mongoose = require('mongoose');
 mongoose.connect(dbUrl);
 
+// models loading
+var models_path = __dirname + '/app/models';
+var walk = function(path) {
+  fs
+    .readdirSync(path)
+    .forEach(function(file) {
+      var newPath = path + '/' + file;
+      var stat = fs.statSync(newPath);
+
+      if (stat.isFile()) {
+        if (/(.*)\.(js|coffee)/.test(file)) {
+          require(newPath)
+        }
+      } else if (stat.isDirectory()){
+        walk(newPath);
+      }
+    });
+}
+
 app.set('views', './app/views/pages');
 app.set('view engine', 'jade');
 
@@ -38,7 +57,7 @@ if ('development' === app.get('env')) {
   app.set('showStackError', true);
   app.use(logger(':method :url :status :remote-addr'));
   app.locals.pretty = true;
-  mongoose.set('debug', true);
+  // mongoose.set('debug', true);
 }
 
 require('./config/routes')(app);
