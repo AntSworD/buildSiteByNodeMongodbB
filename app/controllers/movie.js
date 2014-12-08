@@ -1,4 +1,3 @@
-
 var _ = require('underscore');
 var Movie = require('../models/movie');
 var Category = require('../models/category');
@@ -128,7 +127,7 @@ exports.save = function(req, res) {
         var category = new Category({
           name: categoryName,
           movies: [movie._id]
-        })
+        });
 
         category.save(function(err, category) {
           movie.category = category._id;

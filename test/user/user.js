@@ -5,7 +5,7 @@ function getRandomString(len) {
   if (!len) len = 16;
 
   return crypto.randomBytes(Math.ceil(len / 2));
-};
+}
 
 var should = require('should');
 var app = require('../../app');
