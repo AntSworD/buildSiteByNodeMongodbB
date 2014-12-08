@@ -65,6 +65,7 @@ module.exports = function(grunt) {
 
     nodemon: {
       dev: {
+        script: 'app.js',
         options: {
           file: 'app.js',
           args: [],
@@ -105,9 +106,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
-  grunt.option('force', true)
+  grunt.option('force', true);
 
-  grunt.registerTask('default', ['concurrent'])
+  grunt.registerTask('default', ['concurrent']);
 
-  grunt.registerTask('test', ['mochaTest'])
+  grunt.registerTask('test', ['mochaTest']);
 };
